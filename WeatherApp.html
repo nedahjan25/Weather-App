@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <h1>wether App</h1>
+    
+		<body onload="loadList(http://api.openweathermap.org/data/2.5/forecast?mode=json&q=)">
+		<form id="myForm">
+			<select id="myList" onchange="myFunction()">
+			</select>
+			
+			<p> The City is <input type="text" id="demo" size"20"></p>
+			</form>
+			
+			<div id"weather"></div>
+			
+			<script>
+			  async function loadList() {
+				var list = "<option></option>";
+				var url = 'countries.json';
+				var response = await fetch(url);
+				var data = await response.json();
+				for(i=0;i<data.lenght;i++){
+				list += "<option>"+data[i].Capital+"</option">;
+				}
+				list += "</select>";
+				document. getElementById("myList"). innerHTML = list;
+				}
+				
+				function loadData(url){
+					var xmlhttp = new XMLHttpRequest () :
+					xmihttp.onreadystatechange = function () {
+						if ((this.readyState === 4) && (this.status ===200)) {
+							var data = JSON.parse(xmlhttp.responseText)
+							var div="<div>";
+							div+="<div>Weather:" +data["weather"] [0].main + "</div>"
+							div+="<div>Description:" + data["weather"][0].description + "</div>"
+							div+="</div">;
+							document.getElementById("weather").innerHTML =div;
+							}
+						}
+		
+						xmlhttp.open("GET", url, true);
+						xmlhttp.send(){
+						}
+					//  http://api.openweathermap.org/data/2.5/forecast? mode=json&q=[CITY]&appid=b190a0605344cc4f3af08d0dd473dd25
+					
+						function myFunction(){
+						var urlBegin  ="http://api.openweathermap.org/data/2.5/forecast?mode=json&q=";
+						var urlEnd ="&appid=47ec4ee406d88937aca8230efba6905b";
+						var mylist = document.getElementById("myList");
+						document.getElementById ("demo").value = mylist. options[mylist.selectedIndex].text;
+						var citySelection = mylist.options[mylist.selectedIndex].text;
+						var fullUrl = urlBegin+citySelection+urlEnd;
+						loadData(fullUrl);
+						
+					</script>
+				</body>
+			</html>
+						
+						
+						
+						
